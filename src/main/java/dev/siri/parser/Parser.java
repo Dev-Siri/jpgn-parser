@@ -1,8 +1,7 @@
 package dev.siri.parser;
 
+import dev.siri.models.Metadata;
 import dev.siri.parser.exceptions.PgnParseException;
-
-import java.util.List;
 
 public class Parser {
     private final String gamePgn;
@@ -19,10 +18,16 @@ public class Parser {
             throw new PgnParseException("PGN is missing one or more parts, likely the move list.");
         }
 
-        for (final String line : lines) {
-            if (line.startsWith("[")) {
+        final String metadataSection = lines[0];
+        final String movesSection = lines[1];
 
-            }
-        }
+        final Metadata metadata = this.parseMetadata(metadataSection);
+    }
+
+    private Metadata parseMetadata(String metadataContent) {
+        System.out.println(metadataContent);
+        final Metadata.Builder metadataBuilder = new Metadata.Builder("Garry", "Anatoly", "Moscow", "1984", "World ChampionShip", Metadata.GameResult.WHITE_WINS);
+
+        return metadataBuilder.build();
     }
 }
