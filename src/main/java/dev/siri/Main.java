@@ -1,11 +1,10 @@
 package dev.siri;
 
+import dev.siri.models.Game;
 import dev.siri.parser.Parser;
 import dev.siri.parser.exceptions.PgnParseException;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class Main {
@@ -21,8 +20,9 @@ public class Main {
         try {
             final String fileContent = fileHandler.readFileToString();
             final Parser pgnParser = new Parser(fileContent);
+            final Game game = pgnParser.parse();
 
-            pgnParser.parse();
+
         } catch (FileNotFoundException _) {
             System.err.println("ERR: PGN File does not exist at " + filePath);
         } catch (IOException _) {

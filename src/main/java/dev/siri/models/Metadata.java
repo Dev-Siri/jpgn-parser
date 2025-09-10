@@ -1,5 +1,6 @@
 package dev.siri.models;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 public class Metadata {
@@ -12,6 +13,9 @@ public class Metadata {
 
     private final String whitePlayer;
     private final String blackPlayer;
+    private final Integer whiteElo;
+    private final Integer blackElo;
+    private final String round;
     private final String date;
     private final String site;
     private final String event;
@@ -20,10 +24,14 @@ public class Metadata {
     private final String eco;
     private final String opening;
     private final Integer plyCount;
+    private final HashMap<String, String> extraHeaders;
 
     public Metadata(Builder builder) {
         this.whitePlayer = builder.whitePlayer;
         this.blackPlayer = builder.blackPlayer;
+        this.whiteElo = builder.whiteElo;
+        this.blackElo = builder.blackElo;
+        this.round = builder.round;
         this.date = builder.date;
         this.site = builder.site;
         this.event = builder.event;
@@ -32,30 +40,68 @@ public class Metadata {
         this.eco = builder.eco;
         this.opening = builder.opening;
         this.plyCount = builder.plyCount;
+        this.extraHeaders = builder.extraHeaders;
     }
 
     public static class Builder {
-        // required
-        private final String whitePlayer;
-        private final String blackPlayer;
-        private final String date;
-        private final String site;
-        private final String event;
-        private final GameResult result;
-
-        // optional
+        private String whitePlayer;
+        private String blackPlayer;
+        private Integer whiteElo;
+        private Integer blackElo;
+        private String date;
+        private String round;
+        private String site;
+        private String event;
+        private GameResult result;
         private String annotator;
         private String eco;
         private String opening;
         private Integer plyCount;
+        private HashMap<String, String> extraHeaders;
 
-        public Builder(String whitePlayer, String blackPlayer, String date, String site, String event, GameResult result) {
+        public Builder whitePlayer(String whitePlayer) {
             this.whitePlayer = whitePlayer;
+            return this;
+        }
+
+        public Builder blackPlayer(String blackPlayer) {
             this.blackPlayer = blackPlayer;
+            return this;
+        }
+
+        public Builder whiteElo(int whiteElo) {
+            this.whiteElo = whiteElo;
+            return this;
+        }
+
+        public Builder blackElo(int blackElo) {
+            this.blackElo = blackElo;
+            return this;
+        }
+
+        public Builder round(String round) {
+            this.round = round;
+            return this;
+        }
+
+        public Builder date(String date) {
             this.date = date;
+            return this;
+        }
+
+        public Builder site(String site) {
             this.site = site;
+            return this;
+        }
+
+        public Builder event(String event) {
             this.event = event;
+            return this;
+        }
+
+        public Builder result(GameResult result) {
             this.result = result;
+            return this;
         }
 
         public Builder annotator(String annotator) {
@@ -78,6 +124,11 @@ public class Metadata {
             return this;
         }
 
+        public Builder extraHeaders(HashMap<String, String> extraHeaders) {
+            this.extraHeaders = extraHeaders;
+            return this;
+        }
+
         public Metadata build() {
             return new Metadata(this);
         }
@@ -95,6 +146,10 @@ public class Metadata {
         return date;
     }
 
+    public String getRound() {
+        return round;
+    }
+
     public String getSite() {
         return site;
     }
@@ -105,6 +160,14 @@ public class Metadata {
 
     public GameResult getResult() {
         return result;
+    }
+
+    public Optional<Integer> getWhiteElo() {
+        return Optional.ofNullable(whiteElo);
+    }
+
+    public Optional<Integer> getBlackElo() {
+        return Optional.ofNullable(blackElo);
     }
 
     public Optional<String> getAnnotator() {
@@ -123,4 +186,7 @@ public class Metadata {
         return Optional.ofNullable(plyCount);
     }
 
+    public HashMap<String, String> getExtraHeaders() {
+        return extraHeaders;
+    }
 }

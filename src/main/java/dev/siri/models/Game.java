@@ -1,12 +1,12 @@
 package dev.siri.models;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Game {
     private final Metadata metadata;
-    private final List<Move> moves;
+    private final ArrayList<Move> moves;
 
-    public Game(Metadata metadata, List<Move> moves) {
+    public Game(Metadata metadata, ArrayList<Move> moves) {
         this.metadata = metadata;
         this.moves = moves;
     }
@@ -15,7 +15,7 @@ public class Game {
         return metadata;
     }
 
-    public List<Move> getMoves() {
+    public ArrayList<Move> getMoves() {
         return moves;
     }
 }
