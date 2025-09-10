@@ -6,6 +6,11 @@ public class Game {
     private final Metadata metadata;
     private final ArrayList<Move> moves;
 
+    public enum Player {
+        WHITE,
+        BLACK
+    }
+
     public Game(Metadata metadata, ArrayList<Move> moves) {
         this.metadata = metadata;
         this.moves = moves;
